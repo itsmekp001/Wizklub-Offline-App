@@ -1,0 +1,17 @@
+# Visual Studio Code related
+.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+.dart_tool/
+.env/
+**/generated_plugin_registrant.dart
+.packages
+.pub/
+build/
+
+#windows 
+windows/
+
+#web
+web/

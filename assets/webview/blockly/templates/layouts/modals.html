@@ -1,0 +1,42 @@
+<!-- Pop up Code Start for custom function -->
+<div class="modal fade" id="showSessionPopUp" tabindex="-1" role="dialog" aria-labelledby="showSessionPopUp" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Save Workspace</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="header">Enter your file name</div>
+            <input type="text" class="form-control" id="workspace_file_input" placeholder="Filename">
+            <div class="filename-valid invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="saveWorkspace()">Save changes</button>
+        </div>
+        </div>
+    </div>
+</div>
+<!-- popup end -->
+<div class="modal fade" id="deleteWifi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            In order to configure new WiFi connection, we have to delete the current configuration. Shall I delete the current configuration?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-primary delete-confirm-btn">Yes</button>
+        </div>
+        </div>
+    </div>
+</div>

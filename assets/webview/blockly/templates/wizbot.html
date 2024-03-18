@@ -1,0 +1,336 @@
+<!-- Author: Shubam Gupta -->
+<html>
+
+<head>
+    <title>Wizbot Playground</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- required css -->
+    <link rel="stylesheet" href="../static/vendors/bootstrap/bootstrap.min.css">
+
+    <link rel="stylesheet" href="../static/css/wizbot-ui.css">
+    <link rel="stylesheet" href="../static/css/bot-ui.css">
+
+
+    <!-- required blockly files start -->
+    <script src="../static/vendors/blockly/trashcan.js"></script>
+    <!-- importing again jquery bcoz of blockly dependencies -->
+    <!-- <script src="../static/vendors/blockly/python_compressed.js"></script> -->
+    <script src="../static/vendors/blockly/acorn.js"></script>
+    <script src="../static/vendors/blockly/interpreter.js"></script>
+    <script src="../static/vendors/blockly/acorn_interpreter.js"></script>
+    <script src="../static/vendors/blockly/blockly_compressed.js"></script>
+    <script src="../static/vendors/blockly/javascript.js"></script>
+    <script src="../static/vendors/blockly/blocks_compressed.js"></script>
+    <script src="../static/vendors/blockly/javascript_compressed.js"></script>
+    <script src="../static/vendors/blockly/en.js"></script>
+    <script src="../static/vendors/blockly/wait.js"></script>
+    <script src="../static/vendors/blockly/wait_block.js"></script>
+    <!-- required blockly files end -->
+
+    <!-- required javascripts start -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+
+    <script src="../static/jquery-3.6.0.min.js"></script>
+    <script src="../static/vendors/bootstrap/popper.min.js"></script>
+    <script src="../static/vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="../static/vendors/jquery/jquery.nicescroll.min.js"></script>
+
+    <!-- required javascripts end -->
+
+</head>
+
+<body>
+    <div class="wizbot-container">
+        <nav class="navbar navbar-expand-lg navbar-light wizbot-navigation">
+            <div class=" col-md-12 text-center">
+                <button class="btn  run-program-btn" onclick="runCode()" id="runButton"><i class=" wizbot-icons"></i>
+                    Run
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="wizbot_navigation">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+
+                    </li>
+                </ul>
+        </nav>
+
+    </div>
+    <div id="blockly_div" class="blockly-playground"></div>
+
+    <xml id="toolbox" style="display: none">
+        <category name="Blockly Original" expanded="true">
+            <category name="Logic" colour="%{BKY_LOGIC_HUE}">
+                <block type="controls_if"></block>
+                <block type="logic_compare"></block>
+                <block type="logic_operation"></block>
+                <block type="logic_negate"></block>
+                <block type="logic_boolean"></block>
+            </category>
+            <category name="Loops" colour="%{BKY_LOOPS_HUE}">
+                <block type="controls_repeat_ext">
+                    <value name="TIMES">
+                        <block type="math_number">
+                            <field name="NUM">3</field>
+                        </block>
+                    </value>
+                </block>
+                <block type="controls_whileUntil"></block>
+                <block type="controls_for">
+                    <field name="VAR">i</field>
+                    <value name="FROM">
+                        <block type="math_number">
+                            <field name="NUM">1</field>
+                        </block>
+                    </value>
+                    <value name="TO">
+                        <block type="math_number">
+                            <field name="NUM">10</field>
+                        </block>
+                    </value>
+                    <value name="BY">
+                        <block type="math_number">
+                            <field name="NUM">1</field>
+                        </block>
+                    </value>
+                </block>
+                <block type="controls_flow_statements"></block>
+            </category>
+            <category name="Maths" colour="%{BKY_MATH_HUE}">
+                <block type="math_number">
+                    <field name="NUM">123</field>
+                </block>
+                <block type="math_arithmetic"></block>
+                <block type="math_single"></block>
+                <block type="logic_compare"></block>
+            </category>
+            <category name="Text" colour="%{BKY_TEXTS_HUE}">
+                <block type="text"></block>
+                <block type="text_length"></block>
+                <block type="text_print"></block>
+                <block type="text_prompt_ext">
+                    <value name="TEXT">
+                        <block type="text"></block>
+                    </value>
+                </block>
+            </category>
+            <category name="Delay" colour="100">
+                <block type="wait_seconds" id="wait">
+                    <field name="SECONDS">1.0</field>
+                </block>
+            </category>
+            <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}">
+            </category>
+            <category name="Functions" custom="PROCEDURE" colour="%{BKY_PROCEDURES_HUE}">
+            </category>
+            <category name="Json" colour="%{BKY_PROCEDURES_HUE}">
+                <block type="wiz_json_reader"></block>
+                <block type="json_key_parser"></block>
+            </category>
+            <category name="Notification" colour="40" id="color" inline="true">
+                <block type="text_print"></block>
+            </category>
+        </category>
+        <sep></sep>
+        <category name="Wiz Gear" expanded="true">
+
+            <category name="Smart Light" colour="180" id="color" inline="true">
+                <block type="prebuild"></block>
+                <block type="RGB"></block>
+                <block type="wiz_color_time"></block>
+                <block type="wiz_color_power"></block>
+                <block type="wiz_led_color_power"></block>
+                <block type="wiz_single_led_color_power"></block>
+                <block type="wiz_led_color_time"></block>
+                <block type="LED_RGB"></block>
+            </category>
+            <category name="Tri-color LED" colour="50" id="color" inline="true">
+                <block type="TRICOLORRGB"></block>
+                <block type="colorPower"></block>
+                <block type="TRIRGB"></block>
+                <block type="wizgear_tricolor_color_picker"></block>
+
+            </category>
+
+
+            <category name="Buzzer" colour="150" id="color" inline="true">
+                <block type="BuzzerMusic"></block>
+                <block type="BuzzerFrequency"></block>
+                <block type="BuzzerPower"></block>
+                <block type="buzzer_frequency_duration"></block>
+
+            </category>
+            <category name="Seven Segment Display" colour="180" id="color" inline="true">
+                <block type="SS_CUSTOM"></block>
+                <block type="SS_NUM"></block>
+                <block type="SS_CHAR"></block>
+                <block type="SS_INPUT"></block>
+            </category>
+
+            <category name="Music" colour="100" inline="true">
+                <block type="wizgear_dfplayer_controls">
+                </block>
+                <block type="wizgear_dfplayer_specific_track">
+                </block>
+            </category>
+
+            <category name="Motor" colour="0" id="color" inline="true">
+                <block type="motor_comtrol"></block>
+            </category>
+
+            <category name="OLED Display" colour="270" id="color" inline="true">
+                <block type="wizgear_oled_reset"></block>
+                <block type="wizgear_oled_text"></block>
+                <block type="wizgear_oled_circle"></block>
+                <block type="wizgear_oled_rectangle"></block>
+                <block type="wizgear_oled_pixel"></block>
+                <block type="wizgear_oled_line"></block>
+            </category>
+
+            <category name="Sensor" colour="50" id="color" inline="true">
+                <block type="ldr_bridhtness"></block>
+                <block type="wizgear_sensor_read"></block>
+            </category>
+
+
+            <category name="Pan-Tilt" colour="0" id="color" inline="true">
+                <block type="wizgear_servo_tilt"></block>
+                <block type="wizgear_servo_pan"></block>
+                <block type="wizgear_servo_pan_tilt_variable"></block>
+                <block type="wizgear_servo_action"></block>
+            </category>
+
+            <category name="Smart Switch" colour="200" id="color" inline="true">
+                <block type="wizgear_relay"></block>
+            </category>
+
+            <category name="API" colour="260" id="color" inline="true">
+            </category>
+        </category>
+    </xml>
+
+    <!-- Pop up Code Start for custom function -->
+    <div class="modal fade" id="showSessionPopUp" tabindex="-1" role="dialog" aria-labelledby="showSessionPopUp"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Save Workspace</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="header">Enter your file name</div>
+                    <input type="text" class="form-control" id="workspace_file_input" placeholder="Filename">
+                    <div class="filename-valid invalid-feedback">Please fill out this field.</div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="saveWorkspace()">Save changes</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- popup end -->
+    <!-- Chatbot Code Start -->
+
+
+
+
+
+    <footer class="footer">
+        <div class="custom-tooltip-bot">
+            I am Wizbuddy
+        </div>
+        <div class="emily_bot_avatar" id="emily_bot_avatar">
+
+            <div class="chat_icon">
+                <!-- <div class="bot-launcher-open-icon"></div> -->
+                <div class="bot-launcher-close-icon"></div>
+            </div>
+        </div>
+        <div id="snackbar">
+        </div>
+        <div id="emily_wrap" class="dockable ui-resizable ui-draggable ui-draggable-handle"
+            style="z-index: 5000;width: 320px; height: 460px; right: 0px; display: none; bottom: 80px;">
+            <div class="chatheader" id="chatheader">
+                <div class="emily-header-text">Wizbuddy</div>
+                <div class="emily-subheader-text">Your Learning Buddy</div>
+            </div>
+            <div id="messages" class="messages">
+
+
+            </div>
+
+            <div id="emily-footer">
+                <div class="emily-input-wrap">
+                    <div class="emily-input">
+                        <input label="Type your question here." id="chatinput" name="chatinput" type="text"
+                            placeholder="Type your question here." autocomplete="off">
+                    </div>
+                </div>
+                <i id="emily_attach_button" style="display: none;" class="fa fa-paperclip attach_tooltip"
+                    aria-hidden="true"><span class="attach_tooltiptext">Attachment button is enabled for you. Please
+                        attach the required document.</span></i>
+
+                <i id="emily_date_button" style="display: none;" class="fa fa-calendar attach_tooltip"
+                    aria-hidden="true"><span class="attach_tooltiptext">Date Picker is enabled for you. Click on it to
+                        select required date.</span></i>
+
+                <i id="emily_input_button" class="fa fa-paper-plane" aria-hidden="true"></i>
+
+            </div>
+        </div>
+        <div class=" col-md-12 text-center">
+            <img src="../static/images/wizbot_hand_move.gif" class=" bot-icon-custom" data-toggle="tooltip"
+                data-placement="left" title="I am Wizbuddy, your AI powered chatbot." />
+            <h5>WizGear Playground</h5>
+        </div>
+    </footer>
+    </div>
+
+    <!-- saving the Email Id for the logged in user in variable -->
+
+
+    <!-- custom javascript -->
+
+    <!-- blockly basic initialising -->
+    <script src="../static/js/blockly-init.js"></script>
+
+    <!-- wizbot ui operations handler START -->
+    <script src="../static/js/helper.js"></script>
+    <script src="../static/js/wizbot.js"></script>
+    <!-- wizbot ui operations handler END -->
+
+    <!-- wizbot operations internal START -->
+
+
+    <script src="../static/js/operations/color.js"></script>
+    <script src="../static/js/operations/buzzer.js"></script>
+    <script src="../static/js/operations/motor.js"></script>
+    <script src="../static/js/operations/sensor.js"></script>
+    <script src="../static/js/operations/tricolor.js"></script>
+    <script src="../static/js/operations/sevensegment.js"></script>
+    <script src="../static/js/operations/servo.js"></script>
+    <script src="../static/js/operations/relay.js"></script>
+    <script src="../static/js/operations/dfplayer.js"></script>
+    <script src="../static/js/operations/oled_display.js"></script>
+    <script src="../static/js/operations/wiz_sensors.js"></script>
+    <script src="../static/js/operations/json_block.js"></script>
+    <!-- wizbot operations internal END -->
+
+    <!-- calling middleware services for all the actions START-->
+    <script src="../static/js/application.js"></script>
+    <script src="../static/js/chatbot/bot.js"></script>
+    <script src="../static/js/chatbot/speech.js"></script>
+    <script src="../static/js/chatbot/constants.js"></script>
+    <!-- calling middleware services for all the actions START-->
+
+</body>
+
+</html>
